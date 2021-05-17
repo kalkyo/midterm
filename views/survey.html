@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Midterm Survey</title>
+</head>
+<body>
+<h1>Midterm Survey</h1>
+
+<form action="#" method="post" class="form-horizontal">
+
+    <!-- get name -->
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" name="name" id="name" value="">
+        <br>
+    </div>
+
+    <!-- get condiments -->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Select condiments</label>
+        <div class="col-sm-4">
+            <repeat group="{{ @choices }}" value="{{ @choice }}">
+                <label><input type="checkbox"
+                              name="choices[]"
+                              value="{{ @choice }}"
+                    > {{ @choice }}</label><br>
+            </repeat>
+        </div>
+    </div>
+
+
+    <div>
+        <input class="form-control btn btn-default"
+               type="submit" value="Submit">
+    </div>
+</form>
+
+</body>
+</html>
