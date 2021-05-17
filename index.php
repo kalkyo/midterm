@@ -37,10 +37,29 @@ $f3->route('GET|POST /survey', function ($f3){
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //If the form has ben submitted, validated the data
 
-        //Get user input
-        $_SESSION['userChoices'] = implode(", ", $_POST['choices']);
-        $_SESSION['name'] = $_POST['name'];
-        header('location: summary');
+        //Validate Name
+        if (validName($_POST['name'])) {
+            $_SESSION['name'] = $_POST['name'];
+        }
+        //Otherwise, set an error variable in the hive
+        else {
+            $f3->set('errors["name"]', 'Please enter a Name');
+        }
+
+        //Validate Choices
+        if (validChoice($_POST['choices'])) {
+            $userChoices = $_POST['choices'];
+            $_SESSION['userChoices'] = implode(", ", $userChoices);
+        }
+        else {
+            $f3->set('errors["choices"]', 'Please pick at least one choice');
+        }
+
+        //If there are no errors redirect to summary route
+        if (empty($f3->get('errors')))
+        {
+            header('location: summary');
+        }
     }
 
     //Get the data from the model

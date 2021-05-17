@@ -16,6 +16,11 @@
         <br>
     </div>
 
+    <!-- if there is no name-->
+    <check if="{{ isset(@errors['name']) }}">
+        <span class="err">{{ @errors['name'] }}</span>
+    </check>
+
     <!-- get condiments -->
     <div class="form-group">
         <label class="col-sm-2 control-label">Select condiments</label>
@@ -26,6 +31,10 @@
                               value="{{ @choice }}"
                     > {{ @choice }}</label><br>
             </repeat>
+
+            <check if="{{ isset(@errors['choices']) }}">
+                <span class="err">{{ @errors['choices'] }}</span>
+            </check>
         </div>
     </div>
 
